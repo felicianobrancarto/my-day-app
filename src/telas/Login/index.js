@@ -1,22 +1,23 @@
 import React from 'react';
 import {View, StyleSheet, Image, Dimensions, TextInput, TouchableOpacity, Text } from 'react-native';
+import tela2 from '../Tela2';
 
 const width = Dimensions.get('screen').width;
 
-function Login() {
+function Login({navigation}) {
     return <>
       
       <View style= {styles.principal}>
 
 <View style={styles.sectionContainer}>
         
-        <Image style={styles.Image} resizeMode='contain' source={require('../../components/login.png')} />
+        <Image style={styles.Image} resizeMode='contain' source={require('../../components/assets/login.png')} />
         
         <TextInput style={styles.TextInput} placeholder='Digite seu e-mail: '></TextInput>
         <TextInput style={styles.TextInput} placeholder='Digite sua senha: '></TextInput>
 
-        <TouchableOpacity style={styles.botao} onPress={() => {}}>
-          <Text style={styles.textobotao}>ENTRAR</Text>
+        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate("Main")}>
+          <Text style={styles.textobotao}>ENTRAR</Text>                           
         </TouchableOpacity>
 
         
@@ -36,15 +37,15 @@ function Login() {
       paddingVertical: '10%'
     },
     Image: {
-      width: '50%',
-      height: '50%',
+      width: 228,
+      height: 228,
       resizeMode: 'center',
       paddingHorizontal: '50%',
       paddingVertical: 100
   
     },
     TextInput:{
-      backgroundColor: 'white',
+      backgroundColor: '#F6F6F6',
       marginHorizontal: 10,
       marginTop: 20,
       paddingHorizontal: 20,
