@@ -1,15 +1,194 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import Fest from 'react-native-vector-icons/MaterialCommunityIcons';
+import Sport from 'react-native-vector-icons/MaterialIcons';
+import Cozinhar from 'react-native-vector-icons/MaterialCommunityIcons';
+import Clock from 'react-native-vector-icons/AntDesign';
+import Calendar from 'react-native-vector-icons/AntDesign';
 
-function Tela2 () {
-    return<>
-    <View>
+function Tela4 ({route:{params}}) {
+    const itemSave = params.itemSave;
 
-        <Text>
-        Estou na tela 4, Você ainda não tem nenhum registro diário. Para começar, toque no ícone de adicionar na tela.
-        </Text>
-    </View>
+    return <>
+    <View style={estilostela4.Telaprincipal}>
+
+    <View style={estilostela4.Caixa1}>
+
+        <Clock style={estilostela4.iconeclock} name="clockcircleo"  size={15} />
+        <Text style= {estilostela4.TextoHora}>{itemSave.hora}</Text>
+        <Calendar style={estilostela4.iconecalendario} name="calendar" size={15} />
+        <Text style={estilostela4.TextoPrincipal}>HOJE, 23 DE JANEIRO</Text>
+        <Image style={estilostela4.Image} source={require('../../components/assets/happy.png')} />
+        <Text style={estilostela4.TextoBem}>BEM</Text>
+        </View>
+    
+    <View style={estilostela4.Caixa2}>
+        <Fest style={estilostela4.Iconefest} name="dance-ballroom" color={"#000000"} size={40} />
+        <Text style={estilostela4.textoicones}>festa</Text>
+
+        <Sport style={estilostela4.Iconesport} name="sports-handball" color={"#000000"} size={40} />
+        <Text style={estilostela4.textoicones}>esporte</Text>
+
+        <Cozinhar style={estilostela4.Iconecozinha} name="food-turkey" color={"#000000"} size={40} />
+    <Text style={estilostela4.textoicones}>cozinhar</Text>
+    
+        </View>   
+     <View style={estilostela4.Caixa3}>
+         <Text style={estilostela4.Textocaixa3}>
+         Hoje foi um dia muito bom. Joguei futebol no parque, cozinhei uma lasanha para minha família. E à noite, fui à festa de aniversário do meu amigo.
+         </Text>
+         </View>   
+
+        </View>
+    
     </>
-}
 
-export default Tela2;
+};    
+
+const estilostela4 = StyleSheet.create({
+
+    Telaprincipal: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: "#E5E5E5",
+        resizeMode: 'cover',
+
+      },    
+      Caixa1: {
+          width: '90%',
+          height: 160,
+          borderRadius: 16,
+          marginTop: 20,
+          marginLeft: 17
+      },
+
+      TextoHora: {
+        width: 45,
+        height: 25,
+        color: '#969696',
+        marginLeft: 144
+    },
+    iconeclock: {
+        color: '#969696',
+        top: 18,
+        left: 120
+    },
+    iconecalendario: {
+        color: '#969696',
+        top: 18,
+        left: 70
+
+    },
+
+      TextoPrincipal: {
+        width: 150,
+        height: 25,
+        color: '#969696',
+        marginLeft: 90,
+        color: '#969696'
+
+      },
+
+      Image: {
+        width: 50,
+        height: 50,
+        resizeMode: 'center',
+        paddingHorizontal: '50%',
+        marginTop: 15
+        
+
+      },
+
+      TextoBem: {
+          width: 50,
+          height: 50,
+          color: '#E24B4B',
+          marginLeft: 147,
+          marginTop: 4,
+          fontWeight: 'bold'
+
+      },
+
+
+      Caixa2: {
+          backgroundColor: '#FFFFFF',
+          width: '90%',
+          height: 110,
+          borderRadius: 16,
+          marginTop: 35,
+          marginLeft: 17,
+          flexDirection: "row",
+          
+        
+      },
+      
+      textoicones: {
+        
+        width: 47,
+        height: 50,
+        fontWeight: 'bold',
+        fontSize: 12,
+        color: '#000000',
+        marginTop: 70,
+        left: -37
+    
+    },
+
+      Iconefest: {
+        width: 42,
+        height: 42,
+        fontWeight: 600,
+        marginLeft: 30,
+        marginTop: 25,
+        backgroundColor: 'blue',
+        borderRadius: 1000 
+
+    },
+
+    Iconesport: {
+        width: 42,
+        height: 42,
+        fontWeight: 500,
+        marginLeft: 30,
+        marginTop: 25,
+        backgroundColor: 'blue',
+        borderRadius: 1000 
+
+     },
+
+     Iconecozinha: {
+        width: 42,
+        height: 42,
+        fontWeight: 600,
+        marginLeft: 20,
+        marginTop: 25,
+        backgroundColor: 'blue',
+        borderRadius: 1000 
+     },
+
+     Caixa3: {
+        backgroundColor: '#FFFFFF',
+        width: '90%',
+        height: 80,
+        borderRadius: 16,
+        marginTop: 15,
+        marginLeft: 17,
+
+    },
+
+     Textocaixa3: {
+        width: 290,
+        height: 70,
+        fontSize: 13,
+        lineHeight: 19.5,
+        marginTop: 10,
+        marginLeft: 18,
+        color: '#000000',
+        
+    },
+
+
+    
+});      
+
+export default Tela4;

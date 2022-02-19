@@ -2,23 +2,24 @@ import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Tela2 from "../../../telas/Tela2";
 import Tela3 from "../../../telas/tela3";
-import Tela4 from "../../../telas/tela4";
-import Icone from "react-native-vector-icons/Entypo"
+import Icone from "react-native-vector-icons/Entypo";
+import Icone2 from "react-native-vector-icons/AntDesign"
+import Tela5 from "../../../telas/tela5/tela5"
 
 const Tab = createBottomTabNavigator();
 
 function Routestab() {
 return (
-<Tab.Navigator>
+<Tab.Navigator screenOptions={{tabBarShowLabel: false, headerShown: false}}>
 <Tab.Screen options={{
     tabBarIcon: () => <Icone name="home" color={'#304FFE'} size={24} />
 }} name="tela2" component={Tela2} />
 <Tab.Screen options={{
-    tabBarIcon: () => <Icone name="circle-with-plus" color={'#304FFE'} size={30} />
+    tabBarIcon: () => <Icone name="circle-with-plus" color={'#304FFE'} size={50} />
 }} name="tela3" component={Tela3} />
 <Tab.Screen options={{
-    tabBarIcon: () => <Icone name="menu" color={'#304FFE'} size={24} />
-}} name="tela4" component={Tela4} />
+    tabBarIcon: () => <Icone2 name="bars" color={'#304FFE'} size={24} />
+}} name="tela5" component={Tela5} />
 </Tab.Navigator>
 );
 }

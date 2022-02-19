@@ -1,15 +1,35 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, FlatList, TouchableOpacity} from 'react-native';
+import estilostela3 from "../tela3/estilo/estilotela3";
+import Container from './componentes/Container';
+import Icone from './componentes/Icone';
 
-function Tela2 () {
-    return<>
-    <View>
+function Tela3 ({navigation}) {
+    let itemSave = {}
+    return <>
 
-        <Text>
-        Estou na tela3, Você ainda não tem nenhum registro diário. Para começar, toque no ícone de adicionar na tela.
-        </Text>
+<View style={estilostela3.principal}>
+    <FlatList 
+    data={Icone}
+    renderItem={({item}) => 
+    <TouchableOpacity onPress={() => {
+        itemSave = item
+
+        navigation.navigate("Tela4", {itemSave})
+
+    }
+    }
+    >
+
+    <Container {...item} />
+    </TouchableOpacity>}
+    keyExtractor={({ id }) => String(id)}
+    />
+
     </View>
+    
     </>
-}
 
-export default Tela2;
+    };
+
+export default Tela3;   
