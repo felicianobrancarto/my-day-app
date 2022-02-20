@@ -16,7 +16,7 @@ function Login({navigation}) {
         <TextInput style={styles.TextInput} placeholder='Digite seu e-mail: '></TextInput>
         <TextInput style={styles.TextInput} placeholder='Digite sua senha: '></TextInput>
 
-        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate("Main")}>
+        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate("Routestab")}>
           <Text style={styles.textobotao}>ENTRAR</Text>                           
         </TouchableOpacity>
 

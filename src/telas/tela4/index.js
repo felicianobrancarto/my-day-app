@@ -1,41 +1,48 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Fest from 'react-native-vector-icons/MaterialCommunityIcons';
 import Sport from 'react-native-vector-icons/MaterialIcons';
 import Cozinhar from 'react-native-vector-icons/MaterialCommunityIcons';
 import Clock from 'react-native-vector-icons/AntDesign';
 import Calendar from 'react-native-vector-icons/AntDesign';
+import Retorno from 'react-native-vector-icons/AntDesign';
 
-function Tela4 ({route:{params}}) {
+function Tela4 ({route:{params},navigation}) {
     const itemSave = params.itemSave;
+
 
     return <>
     <View style={estilostela4.Telaprincipal}>
+        <TouchableOpacity style={estilostela4.botao} onPress={() => navigation.goBack ()}>
+
+            <Retorno style={estilostela4.retorno} name ="leftcircleo"  size={23}/>
+            
+            </TouchableOpacity>
 
     <View style={estilostela4.Caixa1}>
 
         <Clock style={estilostela4.iconeclock} name="clockcircleo"  size={15} />
         <Text style= {estilostela4.TextoHora}>{itemSave.hora}</Text>
         <Calendar style={estilostela4.iconecalendario} name="calendar" size={15} />
-        <Text style={estilostela4.TextoPrincipal}>HOJE, 23 DE JANEIRO</Text>
-        <Image style={estilostela4.Image} source={require('../../components/assets/happy.png')} />
-        <Text style={estilostela4.TextoBem}>BEM</Text>
+        <Text style={estilostela4.TextoPrincipal}>{itemSave.data}</Text>
+        <Image style={estilostela4.Image} source={itemSave.img} />
+        <Text style={[estilostela4.TextoBem, {color:itemSave.color}]}>{itemSave.humor}</Text>
         </View>
     
     <View style={estilostela4.Caixa2}>
-        <Fest style={estilostela4.Iconefest} name="dance-ballroom" color={"#000000"} size={40} />
+        <Fest style={estilostela4.Iconefest} name="dance-ballroom" color={"white"} size={40} />
         <Text style={estilostela4.textoicones}>festa</Text>
 
-        <Sport style={estilostela4.Iconesport} name="sports-handball" color={"#000000"} size={40} />
+        <Sport style={estilostela4.Iconesport} name="sports-handball" color={"white"} size={40} />
         <Text style={estilostela4.textoicones}>esporte</Text>
 
-        <Cozinhar style={estilostela4.Iconecozinha} name="food-turkey" color={"#000000"} size={40} />
+        <Cozinhar style={estilostela4.Iconecozinha} name="food-turkey" color={"white"} size={40} />
     <Text style={estilostela4.textoicones}>cozinhar</Text>
     
         </View>   
      <View style={estilostela4.Caixa3}>
          <Text style={estilostela4.Textocaixa3}>
-         Hoje foi um dia muito bom. Joguei futebol no parque, cozinhei uma lasanha para minha família. E à noite, fui à festa de aniversário do meu amigo.
+         {itemSave.comentario}
          </Text>
          </View>   
 
@@ -53,7 +60,23 @@ const estilostela4 = StyleSheet.create({
         backgroundColor: "#E5E5E5",
         resizeMode: 'cover',
 
-      },    
+    },    
+
+    botao: {
+        width: 50,
+        height: 50,
+        marginLeft: 30,
+        top: 30,
+        color: "#304FFE",
+        
+    },       
+
+    retorno: {
+        width: 50,
+        height: 50,
+
+    },
+
       Caixa1: {
           width: '90%',
           height: 160,
