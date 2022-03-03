@@ -1,31 +1,25 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Button, Modal, navigation, FlatList, Image  } from 'react-native';
 import Clock from 'react-native-vector-icons/AntDesign';
 import Calendar from 'react-native-vector-icons/AntDesign';
 import Retorno from 'react-native-vector-icons/AntDesign';
 import Api from "../../Services/api"
 
-class Criacao extends Component {
-  constructor(props) {
-      super(props)
-      this.state = {
-          modalVisible: true,
-          atividades: []
-      }
-      this.navigation
-  }
+function Criacao() {
 
-  async componentDidMount() {
-      const response = await Api.get('activities/')
-      this.setState({
-          atividades: response.data
+  const [atividades, setAtividades]= useState([])
+  useEffect(() => {
+   async function getStorage() {
+      Api.get('activities/')
+      .then(response => {
+        const data = response.data
+        setAtividades(data)
       })
-
+  .catch(error => console(error))
   }
-  
+  getStorage()
+  }, [] )
 
-  render() {
-    console.warn(this.state.atividades)
     return (
       <>
         <View style={estilostelacriacao.Telaprincipal}>
@@ -33,7 +27,7 @@ class Criacao extends Component {
     
             <TouchableOpacity
               style={estilostelacriacao.botao}
-              onPress={() => this.props.navigation.goBack()}>
+              onPress={() => navigation.goBack()}>
               <Retorno
                 style={estilostelacriacao.retorno}
                 name="close"
@@ -82,7 +76,7 @@ class Criacao extends Component {
 
             <View style={estilostelacriacao.Caixa3}>
               <FlatList
-              data={this.state.atividades}
+              data={atividades}
               keyExtractor={item => item.id.toString()}
               numColumns={3}
               renderItem={({item}) =>
@@ -104,13 +98,12 @@ class Criacao extends Component {
           
             </View>
 
-            <Button title="Sair" onPress={() => this.sair(false)} />
+            <Button title="Sair" onPress={() => sair(false)} />
           
         </View>
       </>
     );
   }
-}
 
 const estilostelacriacao = StyleSheet.create({
   Telaprincipal: {
@@ -136,9 +129,7 @@ const estilostelacriacao = StyleSheet.create({
     height: 85,
     borderRadius: 18,
     marginLeft: 17,
-    backgroundColor: '#FFFFFF',
-
-
+  
   },
   TextoPrincipal: {
     width: 150,
@@ -175,7 +166,7 @@ const estilostelacriacao = StyleSheet.create({
   },
 
   Caixa2: {
-    backgroundColor: '#FFFFFF',
+    
     width: '90%',
     height: 70,
     borderRadius: 16,
@@ -196,7 +187,8 @@ const estilostelacriacao = StyleSheet.create({
 
 
   textoemoji: {
-    fontSize: 10
+    fontSize: 10,
+    color: "#969696"
 
   
   },
@@ -213,7 +205,10 @@ const estilostelacriacao = StyleSheet.create({
     borderRadius: 16,
     marginTop: 15,
     marginLeft: 17,
-    alignItems: 'center'
+    alignItems: 'center',
+    borderColor: "#000",
+    
+    borderWidth: 1
   },
   textocaixa3: {
     width: 50,
