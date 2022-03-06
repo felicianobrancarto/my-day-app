@@ -1,11 +1,13 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Button, Modal, navigation, FlatList, Image  } from 'react-native';
-import Clock from 'react-native-vector-icons/AntDesign';
-import Calendar from 'react-native-vector-icons/AntDesign';
-import Retorno from 'react-native-vector-icons/AntDesign';
-import Api from "../../Services/api"
+import {View, Text, StyleSheet, TouchableOpacity, Button, Modal, navigation, FlatList, Image, TextInput  } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import Api from "../../Services/api";
+import moment from 'moment';
+import Atividades from '../../telas/Criacao/Atividades';
+import estilosFlatList from './estilos';
 
-function Criacao() {
+
+function Criacao({navigation}) {
 
   const [atividades, setAtividades]= useState([])
   useEffect(() => {
@@ -20,15 +22,18 @@ function Criacao() {
   getStorage()
   }, [] )
 
+  console.warn(atividades)
+
     return (
       <>
+      <Modal animationType='slide'>
         <View style={estilostelacriacao.Telaprincipal}>
           
     
             <TouchableOpacity
               style={estilostelacriacao.botao}
               onPress={() => navigation.goBack()}>
-              <Retorno
+              <Icon
                 style={estilostelacriacao.retorno}
                 name="close"
                 size={23}
@@ -39,9 +44,9 @@ function Criacao() {
               <Text style={estilostelacriacao.TextoPrincipal}>
                 Como você está?
               </Text>
-              <Clock style={estilostelacriacao.iconeclock} name="clockcircleo" size={15}>"08:35"</Clock>
+              <Icon style={estilostelacriacao.iconeclock} name="clockcircleo" size={15}>"08:35"</Icon>
               
-              <Calendar style={estilostelacriacao.iconecalendario} name="calendar" size={15}>"HOJE, 23 DE JANEIRO"</Calendar>
+              <Icon style={estilostelacriacao.iconecalendario} name="calendar" size={15}>"HOJE, 23 DE JANEIRO"</Icon>
          
             </View>
 
@@ -74,33 +79,33 @@ function Criacao() {
 
             </View>
 
-            <View style={estilostelacriacao.Caixa3}>
+            <View style={estilosFlatList.estiloFlat}>
               <FlatList
               data={atividades}
               keyExtractor={item => item.id.toString()}
               numColumns={3}
-              renderItem={({item}) =>
+              renderItem={({item}) => 
+              <Atividades {...item} />
 
-              <Text style={estilostelacriacao.textoFlatlist}>
-                {item.name}
-              </Text>
-            
-      
+              
             }
               />
               
             </View>
 
             <View style={estilostelacriacao.Caixa4}>
-              <Text style={estilostelacriacao.textocaixa4}>
-                Escreva aqui o que aconteceu hoje...
-              </Text>
-          
+              <TextInput placeholder='Escreva aqui o que aconteceu hoje...' style={estilostelacriacao.textocaixa4}/>
+                
             </View>
-
-            <Button title="Sair" onPress={() => sair(false)} />
+            <View >
+            <TouchableOpacity style={estilostelacriacao.estilobotaosalvar} onPress={() => sair(false)}>
+            <Text style={estilostelacriacao.textobotaosalvar}>SALVAR</Text>
+            </TouchableOpacity>
+           
+            </View>
           
         </View>
+        </Modal>
       </>
     );
   }
@@ -108,21 +113,24 @@ function Criacao() {
 const estilostelacriacao = StyleSheet.create({
   Telaprincipal: {
     flex: 1, 
-    backgroundColor: '#E5E5E5',
+    backgroundColor: '#FFFFFF',
     resizeMode: 'cover',
     
   },
   botao: {
     width: 50,
-    height: 50,
+    height: 45,
     marginLeft: 20,
-    top: 20,
-    color: '#304FFE',
+    marginTop:15,
   },
 
   retorno: {
-    width: 50,
-    height: 50,
+    width: 30,
+    height: 26,
+    color:"#697FFF",
+    backgroundColor: '#E5E5E5',
+    textAlign: "center",
+    
   },
   Caixa1: {
     width: '90%',
@@ -132,12 +140,12 @@ const estilostelacriacao = StyleSheet.create({
   
   },
   TextoPrincipal: {
-    width: 150,
-    height: 22,
+    width: 200,
+    height: 30,
     color: '#969696',
     marginLeft: 82,
     color: '#000000',
-    fontSize: 19,
+    fontSize: 23,
     fontWeight: 'bold',
   },
 
@@ -177,14 +185,12 @@ const estilostelacriacao = StyleSheet.create({
     
   },
 
-
   estilosEmoji: {
     width: 40,
     height: 40,
     marginTop: 10,
 
   },
-
 
   textoemoji: {
     fontSize: 10,
@@ -198,29 +204,6 @@ const estilostelacriacao = StyleSheet.create({
 
   },
 
-  Caixa3: {
-    backgroundColor: '#FFFFFF',
-    width: '90%',
-    height: 280,
-    borderRadius: 16,
-    marginTop: 15,
-    marginLeft: 17,
-    alignItems: 'center',
-    borderColor: "#000",
-    
-    borderWidth: 1
-  },
-  textocaixa3: {
-    width: 50,
-    height: 50,
-    
-  },
-  textoFlatlist: {
-    fontSize: 20,
-    marginHorizontal: 20,
-    marginVertical: 35,
-  },
-
   Caixa4: {
     backgroundColor: '#FFFFFF',
     width: '90%',
@@ -228,17 +211,37 @@ const estilostelacriacao = StyleSheet.create({
     borderRadius: 16,
     marginTop: 15,
     marginLeft: 17,
+    borderColor: "#000",
+    borderWidth: 1,
   },
+
   textocaixa4: {
-    width: 250,
-    height: 50,
-    fontSize: 13,
-    marginLeft: 10,
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "bold",
+    textAlign: "center"
+
+  }, 
+  estilobotaosalvar: {
     marginTop: 10,
-    color: '#969696',
+    height: 53,
+    width: 350,
+    marginLeft: 17,
+    backgroundColor: "#304FFE",
+    borderRadius: 8,
+    justifyContent: "center"
+    
+  },
+  textobotaosalvar: {
+    fontSize: 17,
+    color: "#FFFFFF",
+    textAlign: "center",
+    fontWeight: "bold"
+
   },
 });
 
 export default Criacao;
 
-//<Button title="Entrar" onPress={ this.entrar } />
+
+
