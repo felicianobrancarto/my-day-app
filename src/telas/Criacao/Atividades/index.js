@@ -53,8 +53,8 @@ return(
     <View style={estilosFlatList.Caixa3}>
 
     <TouchableOpacity>
-              <Icon name={atividades} size={15}></Icon>
-              <Text>{texto}</Text>
+              <Icon style={estilosFlatList.estiloiconeflat} name={atividades}></Icon>
+              <Text style={estilosFlatList.textoFlatlist}>{texto}</Text>
               </TouchableOpacity>
     
     </View>

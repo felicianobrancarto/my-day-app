@@ -1,5 +1,5 @@
 import React, {Component, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Button, Modal, navigation, FlatList, Image, TextInput  } from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Button, Modal, FlatList, Image, TextInput  } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Api from "../../Services/api";
 import moment from 'moment';
@@ -22,7 +22,6 @@ function Criacao({navigation}) {
   getStorage()
   }, [] )
 
-  console.warn(atividades)
 
     return (
       <>
@@ -84,7 +83,7 @@ function Criacao({navigation}) {
               data={atividades}
               keyExtractor={item => item.id.toString()}
               numColumns={3}
-              renderItem={({item}) => 
+              renderItem={({item}) =>
               <Atividades {...item} />
 
               
@@ -98,7 +97,7 @@ function Criacao({navigation}) {
                 
             </View>
             <View >
-            <TouchableOpacity style={estilostelacriacao.estilobotaosalvar} onPress={() => sair(false)}>
+            <TouchableOpacity style={estilostelacriacao.estilobotaosalvar} onPress={() => navigation.goBack()}>
             <Text style={estilostelacriacao.textobotaosalvar}>SALVAR</Text>
             </TouchableOpacity>
            
