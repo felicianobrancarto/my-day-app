@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -9,10 +9,14 @@ import {
   Text,
 } from 'react-native';
 import tela2 from '../Tela2';
+import Eye from 'react-native-vector-icons/Ionicons';
 
 const width = Dimensions.get('screen').width;
 
 function Login({navigation}) {
+  const [input, setInput] = useState('');
+  const [hidePass, setHidePass] = useState(true);
+
   return (
     <>
       <View style={styles.principal}>
@@ -25,10 +29,26 @@ function Login({navigation}) {
 
           <TextInput
             style={styles.TextInput}
-            placeholder="Digite seu e-mail: "></TextInput>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Digite sua senha: "></TextInput>
+            placeholder="Digite seu e-mail: "
+          />
+
+          <View style={styles.inputArea}>
+            <TextInput
+              style={styles.textInputSenha}
+              placeholder="Digite sua senha: "
+              value={input}
+              onChangeText={texto => setInput(texto)}
+              secureTextEntry={hidePass}></TextInput>
+            <TouchableOpacity
+              style={styles.icon}
+              onPress={() => setHidePass(!hidePass)}>
+              {hidePass ? (
+                <Eye name="eye" color="#000" size={25} />
+              ) : (
+                <Eye name="eye-off" color="#000" size={25} />
+              )}
+            </TouchableOpacity>
+          </View>
 
           <TouchableOpacity
             style={styles.botao}
@@ -55,13 +75,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: '50%',
     paddingVertical: 100,
   },
-  TextInput: {
-    backgroundColor: '#F6F6F6',
-    marginHorizontal: 10,
-    marginTop: 20,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-  },
 
   botao: {
     backgroundColor: '#C6CEFF',
@@ -81,6 +94,37 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#304FFE',
+  },
+  TextInput: {
+    backgroundColor: '#F6F6F6',
+    marginHorizontal: 10,
+    marginTop: 20,
+    paddingHorizontal: 10,
+    borderRadius: 12,
+    fontSize: 18,
+  },
+
+  inputArea: {
+    flexDirection: 'row',
+    width: '93%',
+    backgroundColor: '#F6F6F6',
+    borderRadius: 12,
+    height: 47,
+    alignItems: 'center',
+    marginLeft: 12,
+    marginTop: 15,
+  },
+  textInputSenha: {
+    width: '85%',
+    height: 50,
+    padding: 8,
+    fontSize: 18,
+  },
+  icon: {
+    width: '15%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 export default Login;

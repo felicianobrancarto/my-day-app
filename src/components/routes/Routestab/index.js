@@ -10,7 +10,7 @@ import Routes3 from '../Routes3';
 const Tab = createBottomTabNavigator();
 
 function Routestab() {
-  const Tela6 = () => <View />
+  const Tela6 = () => <View />;
   return (
     <Tab.Navigator screenOptions={{tabBarShowLabel: false, headerShown: false}}>
       <Tab.Screen
@@ -20,27 +20,29 @@ function Routestab() {
         name="tela2"
         component={Tela2}
       />
+
       <Tab.Screen
         options={{
           tabBarIcon: () => (
             <Icone name="circle-with-plus" color={'#304FFE'} size={50} />
           ),
         }}
-        name="Routes3"
-        component={Routes3}
+        name="Tela6"
+        component={Tela6}
+        listeners={({navigation}) => ({
+          tabPress: e => {
+            e.preventDefault();
+            navigation.navigate('Criacao');
+          },
+        })}
       />
+
       <Tab.Screen
         options={{
           tabBarIcon: () => <Icone2 name="bars" color={'#304FFE'} size={24} />,
         }}
-        name="Tela6"
-        component={Tela6}
-        listeners = {({navigation}) => ({
-          tabPress: (e) => {
-            e.preventDefault()
-            navigation.navigate("Criacao")
-          }
-        })}
+        name="Routes3"
+        component={Routes3}
       />
     </Tab.Navigator>
   );
